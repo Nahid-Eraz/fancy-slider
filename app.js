@@ -39,7 +39,7 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
-
+ 
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -68,13 +68,13 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image area
   imagesArea.style.display = 'none';
-
+  
   let duration = document.getElementById('duration').value || 1000;
-  if (duration < 0) {
+  if(duration < 0){
     alert("Can not input negative value in slider timer")
     return;
   }
-  else {
+  else{
     sliders.forEach(slide => {
       let item = document.createElement('div')
       item.className = "slider-item";
@@ -117,17 +117,19 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-searchBtn.addEventListener('click', function () {
-  searchHandler()
+document.getElementById('search').addEventListener("keypress", function(event){
+  if(event.key === "Enter"){
+    searchBtn.click();
+  }
 })
 
-searchHandler = () => {
+searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
-}
+})
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
