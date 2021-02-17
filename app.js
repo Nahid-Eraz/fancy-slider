@@ -43,9 +43,9 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
-  } else {
-    //*********Error 5  toggle*/
-    alert('Hey, Already added !')
+  } 
+  else {
+    sliders.splice(item, 1);
   }
 }
 var timer
@@ -72,7 +72,7 @@ const createSlider = () => {
   let duration = document.getElementById('duration').value || 1000;
   if(duration < 0){
     alert("Can not input negative value in slider timer")
-    return;
+    return createSlider();
   }
   else{
     sliders.forEach(slide => {
@@ -129,6 +129,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  search.value = '';
 })
 
 sliderBtn.addEventListener('click', function () {
