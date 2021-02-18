@@ -4,6 +4,7 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const audio = document.getElementById("my-audio");
 // selected image 
 let sliders = [];
 
@@ -38,13 +39,13 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  
- 
+
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     element.classList.add('added');
     sliders.push(img);
-  } 
+  }
   else {
     element.classList.remove('added');
     sliders.splice(item, 1);
@@ -70,29 +71,27 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image area
   imagesArea.style.display = 'none';
-  
+
+
   let duration = document.getElementById('duration').value || 1000;
-  if(duration < 0){
-    alert("Can not input negative value in slider timer")
-    return createSlider();
+  if (duration < 0) {
+    alert("Wrong Input,Default value will set at 2000ms")
+    duration = 2000;
   }
-  else{
-    sliders.forEach(slide => {
-      let item = document.createElement('div')
-      item.className = "slider-item";
-      item.innerHTML = `<img class="w-100"
-      src="${slide}"
-      alt="">`;
-      sliderContainer.appendChild(item)
-    })
-  }
+  sliders.forEach(slide => {
+    let item = document.createElement('div')
+    item.className = "slider-item";
+    item.innerHTML = `<img class="w-100"
+    src="${slide}"
+    alt="">`;
+    sliderContainer.appendChild(item)
+  })
   changeSlide(0)
   timer = setInterval(function () {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
 }
-
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
@@ -119,13 +118,15 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-document.getElementById('search').addEventListener("keypress", function(event){
-  if(event.key === "Enter"){
+document.getElementById('search').addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
     searchBtn.click();
   }
 })
 
 searchBtn.addEventListener('click', function () {
+  audio.volume = 0.2;
+  audio.play()
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
