@@ -5,6 +5,7 @@ const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 const audio = document.getElementById("my-audio");
+
 // selected image 
 let sliders = [];
 
@@ -50,6 +51,8 @@ const selectItem = (event, img) => {
     element.classList.remove('added');
     sliders.splice(item, 1);
   }
+  const slideImageSelection = sliders.length;
+  document.getElementById("count-images").innerText = slideImageSelection;
 }
 var timer
 const createSlider = () => {
