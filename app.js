@@ -131,11 +131,13 @@ searchBtn.addEventListener('click', function () {
   audio.volume = 0.2;
   audio.play()
   document.querySelector('.main').style.display = 'none';
+  document.getElementById("count-image-number").style.display = "block";
   clearInterval(timer);
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
   search.value = '';
+  document.getElementById("count-images").innerText = 0;
 })
 
 sliderBtn.addEventListener('click', function () {
